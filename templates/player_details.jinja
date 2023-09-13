@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title> {{player.name}} </title>
+    </head>
+    <body>
+    Name: {{player.name}}
+    <br>Age: {{ player.age }}
+    <br>Position:{{ player.position }}
+    <br>Club: {{ player.club_id }}
+        <form style = "display:inline" action="/players/{{player.id}}" method = "POST">
+        <br><label for="name">Name:</label>
+        <input type="text" name = "name" id="name"/>
+
+        <label for="age">Age:</label>
+        <input type="number" name = "age" id="age"/>
+
+        <label for="position">Position:</label>
+        <input type="text" name = "position" id="position"/>
+        
+        <br><label for="dropdown">Select a club:</label>
+        <select id="dropdown" name="club_id">
+            {% for club in clubs %}
+                <option value="{{ club.id }}">{{ club.club_name }}</option>
+            {% endfor %}    
+            
+        <br>===================
+        </div>
+    <input type = "submit" value = "edit player">
+        </form>
+        <br><a href ="/players">Back to list of all players</a>
+</body>
+</html>
