@@ -1,8 +1,10 @@
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <html>
     <head>
     <title> Football in Edinburgh </title>
     </head>
     <body>
+    <h1>Football in Edinburgh</h1>
     {% for player in players %}
     <div>
     Player name: <a href="{{ url_for('players.view_player', id=player.id) }}">{{ player.name }}</a> 

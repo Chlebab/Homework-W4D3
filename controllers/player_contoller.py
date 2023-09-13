@@ -10,21 +10,23 @@ player_blueprint = Blueprint("players", __name__)
 @player_blueprint.route("/players")
 def get_players():
     
-    club1 = Club(club_name="Hearts")
-    club2 = Club(club_name="Hibernian")
+    # db.drop_all()
+    
+    # club1 = Club(club_name="Hearts")
+    # club2 = Club(club_name="Hibernian")
 
-    db.session.add(club1)
-    db.session.add(club2)
+    # db.session.add(club1)
+    # db.session.add(club2)
 
-    db.session.commit()
+    # db.session.commit()
 
-    player1 = Player(name="Craig Gordon", age=40, position="Goalkeeper", club_id = club1.id)
-    player2 = Player(name="David Marshall", age=38, position="Goalkeeper", club_id = club2.id)
+    # player1 = Player(name="Craig Gordon", age=40, position="Goalkeeper", club_id = club1.id)
+    # player2 = Player(name="David Marshall", age=38, position="Goalkeeper", club_id = club2.id)
 
-    db.session.add(player1)
-    db.session.add(player2)
+    # db.session.add(player1)
+    # db.session.add(player2)
 
-    db.session.commit()
+    # db.session.commit()
     
     clubs_from_db = Club.query.all()
     players_from_db = Player.query.all()
@@ -47,8 +49,8 @@ def view_player(id):
     clubs_from_db = Club.query.all()
     players_from_db = Player.query.all()
     for player in players_from_db:
-        print(f'ID WE ARE LOOKING FOR {id}')
-        print(player.id)
+        # print(f'ID WE ARE LOOKING FOR {id}')
+        # print(player.id)
         if player.id == id:
             return render_template("player_details.jinja", player=player, clubs=clubs_from_db)
 
@@ -61,6 +63,28 @@ def update_player(player_id):
     player_to_update.club_id = int(request.form['club_id'])
     db.session.commit()
     return redirect(f"/players/{player_id}")
+
+@player_blueprint.route("/players/delete", methods =["POST"])
+def delete_player():
+    id = int(request.form.get("player_id"))
+    players_from_db = Player.query.all()
+    for player in players_from_db:
+        if player.id == id:
+            print(f'ID WE ARE LOOKING FOR {id}')
+            print(player.id)
+            db.session.delete(player)
+            db.session.commit()
+
+# def delete_player():
+#     id = request.form.get("player_id")  
+#     player = Player.query.get(id)  # Use query.get() to retrieve the player by its ID
+
+#     if player:
+#         # Remove the player from the database
+#         db.session.delete(player)
+#         db.session.commit()
+    return redirect("/players")
+
 
 
 

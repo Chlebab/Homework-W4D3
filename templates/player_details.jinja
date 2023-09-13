@@ -3,30 +3,36 @@
         <title> {{player.name}} </title>
     </head>
     <body>
-    Name: {{player.name}}
+    <h2>Player details:</h2>
+    <br>Name: {{player.name}}
     <br>Age: {{ player.age }}
-    <br>Position:{{ player.position }}
-    <br>Club: {{ player.club_id }}
+    <br>Position: {{ player.position }}
+    <br>Club: {{ player.club_id }}<br>
+    <br>== Editing Section ==
         <form style = "display:inline" action="/players/{{player.id}}" method = "POST">
         <br><label for="name">Name:</label>
-        <input type="text" name = "name" id="name"/>
+        <input type="text" name = "name" id="name" required><br>
 
         <label for="age">Age:</label>
-        <input type="number" name = "age" id="age"/>
+        <input type="number" name = "age" id="age" required><br>
 
         <label for="position">Position:</label>
-        <input type="text" name = "position" id="position"/>
+        <input type="text" name = "position" id="position" required><br>
         
-        <br><label for="dropdown">Select a club:</label>
-        <select id="dropdown" name="club_id">
+        <label for="dropdown">Select a club:</label>
+        <select id="dropdown" name="club_id" required><br>
             {% for club in clubs %}
-                <option value="{{ club.id }}">{{ club.club_name }}</option>
-            {% endfor %}    
-            
-        <br>===================
-        </div>
-    <input type = "submit" value = "edit player">
+                <option value="{{ club.id }}">{{ club.club_name }}</option><br>
+            {% endfor %}   
+        </select><br>            
+        <input type = "submit" value = "edit player"><br>
         </form>
+
+        <br><form action="/players/delete" method="POST">
+            <input type="hidden" name="player_id" value="{{ player.id }}">
+            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+
         <br><a href ="/players">Back to list of all players</a>
 </body>
 </html>
