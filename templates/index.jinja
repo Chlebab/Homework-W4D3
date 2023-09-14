@@ -10,7 +10,7 @@
     Player name: <a href="{{ url_for('players.view_player', id=player.id) }}">{{ player.name }}</a> 
     <br>Age: <b>{{ player.age }}</b> 
     <br>Position: <b>{{ player.position }}</b>
-    <br>Club: <b>{{ player.club_id }}</b>
+    <br>Club: <b>{{ player.club.club_name }}</b>
     <br>===================
     {% endfor %}
     </div>

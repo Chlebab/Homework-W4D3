@@ -7,7 +7,7 @@
     <br>Name: {{player.name}}
     <br>Age: {{ player.age }}
     <br>Position: {{ player.position }}
-    <br>Club: {{ player.club_id }}<br>
+    <br>Club: {{ player.club.club_name }}<br>
     <br>== Editing Section ==
         <form style = "display:inline" action="/players/{{player.id}}" method = "POST">
         <br><label for="name">Name:</label>
