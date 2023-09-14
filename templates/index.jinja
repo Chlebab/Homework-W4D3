@@ -8,8 +8,8 @@
     {% for player in players %}
     <div>
     Player name: <a href="{{ url_for('players.view_player', id=player.id) }}">{{ player.name }}</a> 
-    <br><b>Age: {{ player.age }}</b> 
-    <br>Position:<b>{{ player.position }}</b>
+    <br>Age: <b>{{ player.age }}</b> 
+    <br>Position: <b>{{ player.position }}</b>
     <br>Club: <b>{{ player.club_id }}</b>
     <br>===================
     {% endfor %}
